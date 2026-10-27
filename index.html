@@ -48,7 +48,7 @@ h1 small{display:block;font-family:var(--font-body);font-size:14px;color:var(--m
 /* 탐구 고리 */
 .ring-card{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:16px}
 @media(min-width:720px){.ring-card{grid-template-columns:300px minmax(0,1fr);align-items:center}}
-.ring{width:100%;max-width:320px;margin:0 auto;display:block}
+.ring{width:100%;height:auto;max-width:320px;margin:0 auto;display:block}
 .ring .seg{cursor:pointer;transition:opacity .2s,transform .2s;transform-origin:150px 150px}
 .ring .seg path{stroke:var(--surface);stroke-width:3}
 .ring .seg text{fill:#fff;font-weight:700;font-size:13px;pointer-events:none;font-family:var(--font-body)}
@@ -82,7 +82,7 @@ h1 small{display:block;font-family:var(--font-body);font-size:14px;color:var(--m
 .card h3 span{display:block;font-family:var(--font-body);font-size:11.5px;color:var(--muted);font-weight:400;margin-top:1px}
 .card p{margin:4px 0 0;font-size:13px;color:var(--muted);line-height:1.5}
 .card .mini{width:92px;height:72px;background:var(--surface2);border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:4px}
-.card .mini svg{width:100%;height:100%}
+.card .mini svg{width:100%;height:auto;max-height:100%}
 .empty{padding:40px 10px;text-align:center;color:var(--muted)}
 
 /* 상세 시트 */
@@ -98,10 +98,10 @@ h1 small{display:block;font-family:var(--font-body);font-size:14px;color:var(--m
 .sheet-head h2 span{display:block;font-family:var(--font-body);font-size:12.5px;color:var(--muted);font-weight:400;margin-top:2px}
 .close{margin-left:auto;flex:none;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--fg);font-size:20px;line-height:1;cursor:pointer}
 .close:focus-visible{outline:2px solid var(--fg)}
-.sheet-body{--phase:var(--c);overflow-y:auto;padding:16px max(16px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:grid;gap:16px}
+.sheet-body{--phase:var(--c);overflow-y:auto;grid-auto-rows:max-content;align-content:start;padding:16px max(16px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:grid;gap:16px}
 .lead{font-size:16px;line-height:1.65;margin:0;max-width:62ch}
-.figure{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;overflow-x:auto}
-.figure svg{width:100%;height:auto;max-width:560px;display:block;margin:0 auto}
+.figure{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;overflow:visible}
+.figure svg{width:100%;height:auto;max-width:560px;display:block;margin:0 auto;overflow:visible}
 .figure figcaption{font-size:12.5px;color:var(--muted);text-align:center;margin-top:8px}
 .sec h4{margin:0 0 8px;font-size:13px;letter-spacing:.1em;color:var(--phase);font-weight:700;text-transform:uppercase}
 .sec p{margin:0;max-width:62ch}
@@ -247,7 +247,7 @@ footer b{color:var(--fg);font-weight:500}
 
   <section class="view" id="view-strategies">
     <section class="ring-card" aria-label="탐구 단계 고리">
-      <svg class="ring" id="ring" viewBox="0 0 300 300" role="group" aria-label="탐구 7단계"></svg>
+      <svg class="ring" id="ring" viewBox="0 0 300 300" width="300" height="300" style="aspect-ratio:1/1" role="group" aria-label="탐구 7단계"></svg>
       <div class="ring-text" id="ringText"></div>
     </section>
     <div class="phases" id="chips" role="group" aria-label="단계 선택"></div>
@@ -321,7 +321,7 @@ const PHASES=[
 /* ---------- SVG 도식 생성기 ---------- */
 const E=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
 const DEFS='<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke" style="fill:var(--muted)"/></marker><marker id="ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--phase)"/></marker></defs>';
-const SV=(w,h,i)=>`<svg class="viz" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">${DEFS}${i}</svg>`;
+const SV=(w,h,i)=>`<svg class="viz" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" style="aspect-ratio:${w}/${h}" xmlns="http://www.w3.org/2000/svg">${DEFS}${i}</svg>`;
 const T=(x,y,t,o={})=>`<text x="${x}" y="${y}" font-size="${o.s||12}" text-anchor="${o.a||'middle'}" class="${o.c||''}" font-weight="${o.b?700:400}" dominant-baseline="${o.d||'middle'}">${E(t)}</text>`;
 const R=(x,y,w,h,o={})=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${o.r??8}" class="${o.c||'bx'}" ${o.f?`fill="${o.f}"`:''} ${o.sd?'stroke-dasharray="4 3"':''} ${o.sw?`stroke-width="${o.sw}"`:''}/>`;
 const BOX=(x,y,w,h,t,o={})=>R(x,y,w,h,o)+T(x+w/2,y+h/2,t,{s:o.s||12,b:o.b,c:o.tc||''});
