@@ -27,7 +27,7 @@ const path=require('node:path');
  await page.locator('#q').fill('프레이어');assert.equal(await page.locator('#grid .card').count(),1);await page.locator('#q').fill('');
  await page.screenshot({path:'/tmp/inquiry-qa/desktop.png',fullPage:false});
  await page.evaluate(()=>{openSheet(byName('교차 비교표').id);chooseGuidePane('resources');});assert.equal(await page.locator('.workshop .case-card').count(),3);
- await page.evaluate(()=>{window.print=()=>{};});await page.locator('[data-print-worksheet]').click();assert.ok(await page.locator('#printArea .lesson-table').count());
+ await page.evaluate(()=>{window.print=()=>{};});await page.locator('.visual-original > summary').click();await page.locator('[data-print-worksheet]').click();assert.ok(await page.locator('#printArea .lesson-table').count());
  const worksheet=await page.locator('#printArea').innerText();assert.ok(!worksheet.includes('가능한 응답'));assert.ok(worksheet.includes('놀이터 개선'));
  const printChecks=await page.evaluate(()=>{const issues=[];for(const name of Object.keys(WORKSHOPS)){const s=byName(name);printWorksheet(s);if(!$('printArea').textContent.includes('이름:'))issues.push(name);}printWorksheet(byName('교차 비교표'));return issues;});assert.deepEqual(printChecks,[]);
  await page.emulateMedia({media:'print'});await page.pdf({path:'/tmp/inquiry-qa/worksheet.pdf',format:'A4',printBackground:true});
