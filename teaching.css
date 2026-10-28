@@ -1,0 +1,34 @@
+/* Keep explanations readable across the user's selected backgrounds. */
+.teach-intro,.teach-walk,.teach-application{font-size:15px;line-height:1.9;color:var(--fg)}
+.teach-intro p,.teach-walk p,.teach-application p{margin:8px 0 14px;max-width:68ch}
+.teach-caption,.teach-credits{font-size:12px;line-height:1.8;color:var(--muted)}
+.teach-route{padding:15px 18px;margin:20px 0;border-left:3px solid var(--ink);background:var(--surface2);border-radius:0 8px 8px 0;font-size:13px;line-height:1.8}
+.teach-route p{margin:5px 0}.teach-route b{font-size:14px}
+.teach-material{margin:24px 0;padding:22px;border:1px solid var(--line);border-radius:12px;background:var(--surface2)}
+.teach-material h3{font-size:17px;margin:0 0 12px}.teach-material p{white-space:pre-line}
+.teach-material .teach-caption{border-top:1px solid var(--line);padding-top:10px;margin-bottom:0}
+.teach-steps{list-style:none;padding:0;margin:28px 0;display:grid;gap:30px}
+.teach-step{border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
+.teach-step>h3{display:flex;align-items:center;gap:12px;font-size:18px;line-height:1.6;padding:20px;margin:0;border-bottom:1px solid var(--line)}
+.teach-number{display:inline-flex;flex:none;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--on-ink);font-size:14px}
+.teach-turn,.teach-reply,.teach-reason{padding:18px 22px}
+.teach-step h4{font-size:12px;color:var(--muted);margin:0 0 8px}
+.teach-step p{margin:0;line-height:1.9}
+.teach-reply{background:var(--surface2);border-block:1px solid var(--line)}
+.teach-reply p{font-size:16px}.teach-reason{border-left:3px solid var(--ink)}
+.teach-figure{margin:0;padding:16px 20px;border-bottom:1px solid var(--line)}
+.teach-figure figcaption{font-size:12px;line-height:1.8;margin:8px 0;color:var(--muted)}
+.teach-figure .v-evidence-grid{font-size:13px}.teach-figure .v-evidence p{font-size:13px}
+.teach-mini-table{border-collapse:collapse;width:100%;font-size:13px}.teach-mini-table th,.teach-mini-table td{padding:10px;border:1px solid var(--line);text-align:left}.teach-mini-table th{background:var(--surface2)}
+.teach-check{padding:20px;border:2px solid var(--ink);border-radius:10px;margin:24px 0}
+.teach-check h3,.teach-application>h3{font-size:19px;margin:0 0 12px}
+.teach-application>div{padding:18px 0;border-bottom:1px solid var(--line)}
+.teach-application h4{font-size:15px;margin:0 0 8px}
+.teach-glossary dl{margin:12px 0}.teach-glossary dl>div{padding:12px 0;border-bottom:1px solid var(--line)}
+.teach-glossary dt{font-weight:700;font-size:14px}.teach-glossary dd{margin:5px 0 0;font-size:14px;line-height:1.85}
+.teach-credits{margin:24px 0;padding-top:15px;border-top:1px solid var(--line);overflow-wrap:anywhere}
+.teach-credits a{color:var(--ink);text-decoration:underline}
+.teach-walk .next-section{display:flex;gap:10px;flex-wrap:wrap}
+.teach-plan p{margin:28px 0}
+@media(max-width:640px){.teach-intro,.teach-walk,.teach-application{font-size:14px;line-height:1.85}.teach-material{padding:16px;margin:18px 0}.teach-material h3{font-size:16px}.teach-route{padding:12px 14px}.teach-step>h3{font-size:16px;padding:16px}.teach-turn,.teach-reply,.teach-reason{padding:16px}.teach-reply p{font-size:15px}.teach-figure{padding:14px}.teach-figure .v-evidence-grid{grid-template-columns:1fr}.guide-tabs button{font-size:11px}.teach-check{padding:16px}.teach-check h3{font-size:17px}}
+@media print{#printArea .teach-print{font-size:10.5pt;line-height:1.65;color:#111}#printArea .teach-step{break-inside:avoid;margin-bottom:16px;border-color:#aaa}#printArea .teach-steps{display:block}#printArea .teach-step>h3{font-size:13pt;padding:10px 14px}#printArea .teach-turn,#printArea .teach-reply,#printArea .teach-reason{padding:10px 14px}#printArea .teach-reply{background:#f5f5f5}#printArea .teach-number{background:#333;color:white}#printArea .teach-material{break-inside:avoid;background:#f6f6f6;padding:14px}#printArea .teach-application>div{break-inside:avoid}#printArea .teach-credits{font-size:9pt;color:#333}#printArea .teach-caption{color:#444}#printArea .teach-figure{break-inside:avoid}#printArea .teach-plan{break-inside:avoid}}
