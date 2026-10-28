@@ -173,7 +173,7 @@ function printWorksheet(s){const w=WORKSHOPS[s.n];if(!w)return;
 document.addEventListener('click',e=>{
  const guide=e.target.closest('[data-guide]');if(guide){openSheet(+guide.dataset.guide);return}
  if(e.target.closest('[data-open-unit]')){if(!$('sheet').hidden)closeSheet();setView('unit');$('view-unit').scrollIntoView({behavior:'smooth'});return}
- if(e.target.closest('[data-print-guide]')&&activeStrategy!==null){const body=$('sheetBody').cloneNode(true);body.querySelector('.guide-more:last-child')?.remove();body.querySelector('.guide-toolbar')?.remove();body.querySelectorAll('details').forEach(d=>d.open=true);printContent(S[activeStrategy].n+' · 교사 안내',body.innerHTML);return}
+ if(e.target.closest('[data-print-guide]')&&activeStrategy!==null){const s=S[activeStrategy];const body=document.createElement('div');body.innerHTML=teacherPrintHTML(s);body.querySelectorAll('details').forEach(d=>d.open=true);printContent(s.n+' · 교사 안내',body.innerHTML);return}
  if(e.target.closest('[data-print-worksheet]')&&activeStrategy!==null){printWorksheet(S[activeStrategy]);return}
  if(e.target.closest('[data-print-unit]')){const body=$('view-unit').cloneNode(true);body.querySelectorAll('button').forEach(b=>b.remove());body.querySelectorAll('details').forEach(d=>d.open=true);printContent('우리의 의견은 어떻게 결정에 반영될까? · 8차시 안내',body.innerHTML);return}
  if(e.target.closest('[data-reset-plan]')){delete planDrafts[`${planStd}:${planN}`];saveDraft();openPlan(planStd,planN);}

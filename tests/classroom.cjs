@@ -23,10 +23,10 @@ const path=require('node:path');
   for(const d of STD)for(const n of [6,8,10]){const ls=planFor(d,n);if(ls.length!==n)issues.push(`count ${d.c}/${n}`);for(const l of ls){const mins=l.acts.reduce((a,x)=>a+x[1],0)+(l.withReflect?5:0);if(mins!==40)issues.push(`minutes ${d.c}/${n}/${l.n}/${mins}`);}}
   closeSheet();return {strategies:S.length,standards:STD.length,issues};
  });assert.deepEqual(data.issues,[]);await page.waitForTimeout(250);
- for(let i=0;i<7;i++){await page.locator(`[data-situation="${i}"]`).click();assert.ok(await page.locator('.situation-result').count()>=2);await page.locator('.situation-result').first().click();await page.locator('#closeBtn').click();await page.waitForTimeout(230);}
+ for(let i=0;i<7;i++){await page.locator(`[data-situation="${i}"]`).click();assert.ok(await page.locator('#grid .card').count()>=2);await page.locator('#grid .card').first().click();await page.locator('#closeBtn').click();await page.waitForTimeout(230);}
  await page.locator('#q').fill('프레이어');assert.equal(await page.locator('#grid .card').count(),1);await page.locator('#q').fill('');
  await page.screenshot({path:'/tmp/inquiry-qa/desktop.png',fullPage:false});
- await page.evaluate(()=>openSheet(byName('교차 비교표').id));assert.equal(await page.locator('.workshop .case-card').count(),3);
+ await page.evaluate(()=>{openSheet(byName('교차 비교표').id);chooseGuidePane('resources');});assert.equal(await page.locator('.workshop .case-card').count(),3);
  await page.evaluate(()=>{window.print=()=>{};});await page.locator('[data-print-worksheet]').click();assert.ok(await page.locator('#printArea .lesson-table').count());
  const worksheet=await page.locator('#printArea').innerText();assert.ok(!worksheet.includes('가능한 응답'));assert.ok(worksheet.includes('놀이터 개선'));
  const printChecks=await page.evaluate(()=>{const issues=[];for(const name of Object.keys(WORKSHOPS)){const s=byName(name);printWorksheet(s);if(!$('printArea').textContent.includes('이름:'))issues.push(name);}printWorksheet(byName('교차 비교표'));return issues;});assert.deepEqual(printChecks,[]);
